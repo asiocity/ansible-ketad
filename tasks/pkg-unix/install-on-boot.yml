@@ -1,0 +1,4 @@
+---
+- name: Install Ketad with boot
+  shell: KETA_TOKEN={{ keta_token }} KETA_ENDPOINTS={{ keta_endpoints }} KETA_TAGS={{ keta_tags }} KETA_REGION={{ keta_region }} KETA_NET_INTERFACE={{ keta_net_interface }} {{ keta_ketad_install_script }} --url "{{ keta_url }}" --arch '{{ keta_ketad_arch }}' --version '{{ keta_ketad_version }}' --path "{{ keta_ketad_path }}" --boot
+  when: not ansible_check_mode

@@ -1,0 +1,27 @@
+---
+- name: Download Ketad install script
+  ansible.builtin.get_url:
+    #url: "{{ keta_url }}/api/v1/dc/script/{{ keta_download_key }}?tags={{ keta_tags }}&version={{ keta_ketad_version }}&pandora_region={{ keta_region }}&local_path={{ keta_ketad_path }}&netinterface={{ keta_net_interface }}&boot={{ keta_ketad_boot }}"
+    url: "{{ keta_url }}/api/v1/dc/install/script/v2?os=linux"
+    dest: "{{ keta_ketad_install_script }}"
+    mode: '0777'
+  when: not ansible_check_mode
+
+- name: Check Ketad install script exist
+  stat:
+    path: "{{ keta_ketad_install_script }}"
+  register: install_script
+  when: not ansible_check_mode
+
+- name: Check Ketad install script permission
+  file:
+    path: "{{ keta_ketad_install_script }}"
+    mode: "0777"
+    state: touch
+  when: (not ansible_check_mode) and (install_script.stat.exists)
+
+- include_tasks: pkg-unix/install.yml
+  when: keta_ketad_boot == "false"
+
+- include_tasks: pkg-unix/install-on-boot.yml
+  when: keta_ketad_boot == "true"

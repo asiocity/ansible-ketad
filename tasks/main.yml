@@ -1,0 +1,25 @@
+---
+
+- name: Linux Install Tasks
+  include_tasks: pkg-linux.yml
+  when: ansible_facts.system == "Linux"
+
+- name: Windows Install Tasks
+  include_tasks: pkg-windows.yml
+  when: ansible_facts.os_family == "Windows"
+
+- name: macOS Install Tasks
+  include_tasks: pkg-macos.yml
+  when: ansible_facts.os_family == "Darwin"
+
+- name: Linux Configuration Tasks
+  include_tasks: configure-linux.yml
+  when: ansible_facts.system == "Linux"
+
+- name: Windows Configuration Tasks
+  include_tasks: configure-win.yml
+  when:  ansible_facts.os_family == "Windows"
+
+- name: macOS Configuration Tasks
+  include_tasks: configure-macos.yml
+  when: ansible_facts.os_family == "Darwin"

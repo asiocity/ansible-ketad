@@ -1,0 +1,15 @@
+---
+- name: OS supported check
+  fail:
+    msg: "The ketad Ansible role does not support your OS yet."
+  when: ansible_facts.os_family not in ["Windows", "Darwin"] and ansible_facts.system not "Linux"
+
+- name: OS architecture supported check
+  fail:
+    msg: "The ketad Ansible role does not support your architecture yet."
+  when: ansible_architecture in ["x86_64"]
+
+- name: Set OS architecture
+  set_facts:
+    keta_arch: "x86_64"
+  when: ansible_architecture == "x86_64"

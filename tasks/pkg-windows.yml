@@ -1,0 +1,10 @@
+---
+- name: Download ketad install script
+  win_get_url:
+    url: "{{ keta_url }}/api/v1/dc/install/script/v2?os=windows"
+    dest: "{{ keta_ketad_windows_install_script }}"
+  when: not ansible_check_mode
+
+- name: Install Ketad 
+  win_shell: set KETA_TOKEN={{ keta_token }}&set KETA_URL={{ keta_url }}&set KETA_ARCH={{ keta_ketad_arch }}&set KETA_VERSION={{ keta_ketad_version }}&set KETA_PATH={{ keta_ketad_path }}&set KETA_BOOT={{ keta_ketad_on_boot }}&set KETA_ENDPOINTS={{ keta_endpoints }}&set KETA_TAGS={{ keta_tags }}&set KETA_REGION={{ keta_region }} KETA_NET_INTERFACE={{ keta_net_interface }}&set KETA_NO_LOGIN={{ keta_no_login }}&cscript {{ keta_ketad_windows_install_script }}
+  when: not ansible_check_mode

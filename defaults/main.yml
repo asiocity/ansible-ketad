@@ -1,0 +1,45 @@
+---
+role_version: 1.1.0
+
+# define if the ketad services should be enabled
+keta_ketad_enabled: yes
+
+# default ketad.yaml options
+keta_ketad_config: {}
+
+# default keta-agent.yaml options
+keta_keta-agent_config: {}
+
+# default system-probe.yaml options
+system_probe_config: {}
+network_config: {}
+
+# default user/group
+keta_user: keta
+keta_group: keta
+
+keta_ketad_install_script: "/tmp/installer.sh"
+keta_ketad_windows_install_script: "%TEMP%\\installer.vbs"
+
+keta_token: ""
+keta_endpoints: ""
+keta_tags: ""
+keta_region: ""
+keta_net_interface: ""
+
+keta_url: ""
+keta_ketad_arch: ""
+keta_ketad_version: ""
+keta_ketad_path: ""
+keta_ketad_boot: "false"
+
+# only for windows
+keta_no_login: "false"
+
+# agent integration variables
+integration_command_user_linux: "keta"
+integration_command_user_windows: "administrator"
+integration_command_user_macos: "keta"
+
+# list of additional groups for ketad_user
+keta_additional_groups: {}

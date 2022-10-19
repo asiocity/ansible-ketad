@@ -1,0 +1,22 @@
+---
+- name: Download Ketad install script
+  ansible.builtin.get_url:
+    url: "{{ keta_url }}/api/v1/dc/install/script/v2?os=darwin"
+    dest: "{{ keta_ketad_install_script }}"
+    mode: '0777'
+  when: not ansible_check_mode
+
+- name: Check Ketad install script exist
+  stat:
+    path: "{{ keta_ketad_install_script }}"
+  register: install_script
+  when: not ansible_check_mode
+
+- name: Check Ketad install script permission
+  file:
+    path: "{{ keta_ketad_install_script }}"
+    mode: "0777"
+    state: touch
+  when: not ansible_check_mode and (install_script.stat.exists)
+
+- include_tasks: pkg-unix/install.yaml

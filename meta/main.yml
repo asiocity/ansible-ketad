@@ -1,0 +1,24 @@
+---
+galaxy_info:
+  role_name: ketad
+  namespace: xishu
+  author: Xishu
+  description: Install Ketad and configure
+  company: Xishu
+  license: Apache-2.0
+  min_ansible_version: 2.1
+
+  platforms:
+    - name: GenericLinux
+      versions:
+        - all
+    - name: Windows
+      versions:
+        - all
+    - name: macOS
+      versions:
+        - all
+
+  galaxy_tags:
+    - monitoring
+dependencies: []
